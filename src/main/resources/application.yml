@@ -1,0 +1,28 @@
+
+spring:
+  application:
+    name: build-it-with-spring-boot-mvc-jpa-thymeleaf
+  datasource:
+    url: jdbc:h2:mem:article_db
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    show-sql: true
+
+
+
+server:
+  port: 1344
+  
+  
+#spring:
+#    application:
+#     name: spring-boot-project-mvc-jpa-thymeleaf
+#     
+#datasource:
+#    url: jdbc:h2:mem:articles_db
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#    password: password
+    
