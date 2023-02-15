@@ -52,7 +52,13 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="">Home
+				<li class="nav-item active"><a class="nav-link" href="/home">Home
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item active"><a class="nav-link" href="">Login
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item active"><a class="nav-link" href="">Register
 						<span class="sr-only">(current)</span>
 				</a></li>
 				
@@ -63,8 +69,12 @@
 
 	<!-- Navbar -->
     <div class="container my-2">
+		<div>
+			<h2>CRUD Project</h2>
+		</div>
     <div class="card">
     <div class="card-body">
+		
         <div th:switch="${books}" class="container my-5">
             <p class="my-5">
                 <a href="/add" class="btn btn-primary">
@@ -110,8 +120,19 @@
 						<p>Total Art: [[${totalItem}]]</p>
 						<nav aria-label="Page navigation example">
 							<ul class="pagination">
+								<li th:if="${currentPage !=0}" class="page-item"><a class="page-link" th:href="@{'/page/'+${currentPage-1}}">Previous</a></li>
+
+
+								<li th:each="i:${#numbers.sequence(1,totalPages)}"  th:classappend="${currentPage==i-1 ? 'active' : '' }"  class="page-item">
+				
+								<a class="page-link" th:href="@{'/page/'+${i-1}}">[[${i}]]</a>
+				
+				
+							</li>
+
+								<li th:if="${currentPage+1!=totalPages}" class="page-item"><a class="page-link" th:href="@{'/page/'+${currentPage+1}}">Next</a></li>
 							
-								
+								 
 							</ul>
 						</nav>
 				

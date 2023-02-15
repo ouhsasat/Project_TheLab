@@ -1,7 +1,7 @@
 package com.example.CrudProject;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,21 +11,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.CrudProject.entity.Articles;
 import com.example.CrudProject.service.ArticleService;
 
-
+import org.springframework.data.domain.Page;
 @Controller
 public class ArticleController {
 	@Autowired
 	ArticleService service;
 	
-	@GetMapping("/")
+	@GetMapping("/home")
 	public String home(Model model) {
-		return findPaginated(0, model);
+		model.addAttribute("books", service.findallBooks());
+		return "all-books"; 
 	}
+	
 
 	@GetMapping("/")
 	public String findAll(Model model) {
 		model.addAttribute("books", service.findallBooks());
-		return "all-books";
+		return findPaginated(0, model);
+		
+		//return "all-books";
 		
 	}
 
@@ -75,14 +79,16 @@ public class ArticleController {
 	}
 	
 	@GetMapping("/page/{pageno}")
-	public String findPaginated(@PathVariable int pageno, Model model) {
+	public String findPaginated(@PathVariable int pageno, Model m) {
 
-		Page<Articles> emplist = service.getEMpByPaginates(pageno, pageno);
-		model.addAttribute("emp", emplist);
-		model.addAttribute("currentPage", pageno);
-		model.addAttribute("totalPages", emplist.getTotalPages());
-		model.addAttribute("totalItem", emplist.getTotalElements());
-		return "index";
+		Page<Articles> emplist = service.getEMpByPaginate(pageno, 3);
+		m.addAttribute("books", service.findallBooks());
+		m.addAttribute("books", emplist);
+		m.addAttribute("currentPage", pageno);
+		m.addAttribute("totalPages", emplist.getTotalPages());
+		m.addAttribute("totalItem", emplist.getTotalElements());
+		return "all-books";
 	}
+	
 
 }

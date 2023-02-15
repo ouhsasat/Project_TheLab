@@ -13,7 +13,7 @@ spring:
 
 
 server:
-  port: 1344
+  port: 1348
   
   
 #spring:

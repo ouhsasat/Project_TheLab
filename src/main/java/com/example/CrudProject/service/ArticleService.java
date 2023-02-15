@@ -6,15 +6,15 @@ import java.util.Optional;
 //import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+
 
 import org.springframework.stereotype.Service;
 
 import com.example.CrudProject.entity.Articles;
 import com.example.CrudProject.repository.ArticleRepository;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class ArticleService {
@@ -51,11 +51,12 @@ public class ArticleService {
 		repository.deleteById(id);
 	}
 	
-	
-	
-	public Page<Articles> getEMpByPaginates(int currentPage, int size) {
+	public Page<Articles> getEMpByPaginate(int currentPage, int size) {
 		Pageable p = PageRequest.of(currentPage, size);
 		return repository.findAll(p);
 	}
+
+	
+	
 
 }
